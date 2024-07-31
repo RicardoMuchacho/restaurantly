@@ -15,9 +15,15 @@ const priceLevelMapping: { [key: string]: {text:string, color:string} } = {
 const RestaurantCard = ({restaurant}:Props) => {
   const photoUrl = `https://places.googleapis.com/v1/${restaurant.image}/media?key=${process.env.REACT_APP_MAPS_API_KEY}&maxWidthPx=400`;
   
-  const handleNavigation = () => {
-    window.open(restaurant.link, '_blank');
-  }
+const handleNavigation = () => {
+  window.open(restaurant.link, '_blank');
+}
+
+const formatTitle = () => {
+  if (restaurant.name.length > 16){
+    return restaurant.name.slice(0, 16) + "...";
+  } else return restaurant.name;
+}
 
   return(
       <div style={{width: "280px", height: "280px"}} className="card p-0">
@@ -26,8 +32,8 @@ const RestaurantCard = ({restaurant}:Props) => {
         </div>
         <div className="px-3 py-2">
           <div style={{paddingRight: 10}} className="d-flex justify-content-between">
-            <h5 className="card-title">{restaurant.name}</h5>
-            <h5>{restaurant.rating} <i className="bi bi-star-fill text-primary"></i></h5>
+            <h5 style={{paddingRight: 5}}  className="card-title">{formatTitle()}</h5>
+            <h5 style={{whiteSpace: "nowrap", }}>{restaurant.rating} <i className="bi bi-star-fill text-primary"></i></h5>
           </div>
           <div className="d-flex flex-row justify-content-between py-1">
             <div className="d-flex flex-column gap-1">
