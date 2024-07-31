@@ -51,7 +51,7 @@ const Home = () => {
         <main style={{marginBottom: 100}} className="w-100 h-auto">
           <div className="container">
             <div className="row row-cols-1-sm row-cols-2-md row-cols-3-lg row-cols-4-xl g-3">
-              {restaurants.length == 0 ? (
+              {restaurants.length === 0 ? (
                 Array.from({length: 4}).map((_, index) => (
                   <div key={index} className="col d-flex justify-content-center">
                     <RestaurantPlaceholder/>

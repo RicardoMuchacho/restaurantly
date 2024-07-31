@@ -2,7 +2,6 @@ const apiKey = process.env.REACT_APP_MAPS_API_KEY;
 const apiURL = `https://places.googleapis.com/v1/places:searchText`;
 
 export const fetchRestaurants = async (address: string) => {
-  let encondedAddress = address.replace(" ", "%20")
   const response = await fetch(apiURL, {
     method: 'POST',
     headers: {
