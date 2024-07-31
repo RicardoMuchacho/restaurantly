@@ -1,9 +1,20 @@
 const apiKey = process.env.REACT_APP_MAPS_API_KEY;
-const apiURL = (address: string) => `https://maps.googleapis.com/maps/api/place/textsearch/json?/place/textsearch/json?query=${address}&radius=5000&type=restaurant&key=${apiKey}`;
+const apiURL = `https://places.googleapis.com/v1/places:searchText`;
 
 export const fetchRestaurants = async (address: string) => {
   let encondedAddress = address.replace(" ", "%20")
-  const response = await fetch(apiURL(encondedAddress));
+  const response = await fetch(apiURL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Goog-Api-Key': apiKey!,
+      'X-Goog-FieldMask': 'places.displayName,places.formattedAddress,places.googleMapsUri,places.primaryTypeDisplayName,places.rating,places.priceLevel,places.photos'
+    },
+    body: JSON.stringify({
+      "textQuery": address,
+      "includedType":"restaurant"
+    })
+  });
   console.log(response)
 
   const data = await response.json();

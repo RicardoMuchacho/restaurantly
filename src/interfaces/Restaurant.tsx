@@ -1,15 +1,9 @@
 export interface Restaurant {
-  id: string;
   name: string;
   address: string;
-  cuisine: string;
+  type: string;
   rating: number;
+  price: string;
+  link: string;
   image?: string;
-  link?: string;
-  coordinates: Location;
-}
-
-export interface Location {
-    lat: number;
-    lng: number;
 }
