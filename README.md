@@ -11,6 +11,7 @@ This project is a curriculum project designed to practice React and TypeScript f
 The primary purpose of this project is to:
 - Practice and enhance skills in React and TypeScript.
 - Implement and adhere to SOLID principles in software design.
+- Practice responsive design accross different screen sizes.
 - Gain experience in integrating third-party APIs, specifically the Google API.
 
 ## Features

@@ -22,8 +22,7 @@ const Home = () => {
     try {
       let temp_restaurants:Restaurant[] = [];
       const res = await fetchRestaurants(search)
-      console.log(res)
-      res.places.slice(0, 6).forEach((rt: any) => {
+      res.places.slice(0, 8).forEach((rt: any) => {
         const photoReference = rt.photos?.[0]?.name;
 
         console.log(photoReference)
@@ -38,7 +37,6 @@ const Home = () => {
         })
       })
       setRestaurants(temp_restaurants)
-      console.log(temp_restaurants)
     } catch (error) {
       console.log(error)
     }
@@ -58,7 +56,7 @@ const Home = () => {
         </header>
         <main style={{marginBottom: 100}} className="w-100 h-auto">
           <div className="container">
-            <div className="row justify-content-center row-cols-1-sm row-cols-2-md row-cols-3-lg row-cols-4-xl g-3">
+            <div className="row row-cols-1-sm row-cols-2-md row-cols-3-lg row-cols-4-xl g-3">
               {restaurants.length == 0 ? (
                 Array.from({length: 4}).map((_, index) => (
                   <div key={index} className="col d-flex justify-content-center">
@@ -67,7 +65,7 @@ const Home = () => {
                 ))
               ) : (
                 restaurants.map((restaurant, index) => (
-                  <div key={index} className="col">
+                  <div key={index} className="col d-flex justify-content-center">
                     <RestaurantCard restaurant={restaurant}></RestaurantCard>
                   </div>
                 ))
@@ -81,12 +79,3 @@ const Home = () => {
 }
 
 export default Home
-
-
-            {/* <div className="row row-cols-3 g-3">
-                  {restaurants.map((restaurant, index) => (
-                    <div key={index} className="col">
-                      <RestaurantCard restaurant={restaurant}></RestaurantCard>
-                    </div>
-                  ))}
-                </div> */}
