@@ -4,7 +4,7 @@
 
 This project is a curriculum project designed to practice React and TypeScript fundamentals, as well as SOLID principles. It utilizes the Google API to search for restaurant recommendations based on a text string input.
 
-App link: (https://main--restaurantly-test-app.netlify.app/)
+App link: <a href="https://main--restaurantly-test-app.netlify.app/" target="_blank">https://main--restaurantly-test-app.netlify.app/</a>
 
 ![Screenshot of the app](./public/screenshot.png)
 
