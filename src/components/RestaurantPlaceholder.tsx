@@ -9,7 +9,7 @@ const RestaurantPlaceholder = () => {
       <div className="card-body">
           <h5 className="card-title placeholder-glow">
             <span className="placeholder col-6"></span>
-            <a href="#" style={{marginLeft: 15}} className="btn btn-primary disabled placeholder col-5"></a>
+            <button style={{marginLeft: 15}} className="btn btn-primary disabled placeholder col-5"></button>
             <span className="placeholder col-3"></span>
           </h5>
       </div>
