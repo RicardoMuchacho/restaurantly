@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useState, useRef } from "react";
+import React from "react";
+import { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import { Restaurant } from "../interfaces/Restaurant";
 import RestaurantCard from "../components/RestaurantCard";
@@ -11,11 +11,6 @@ const Home = () => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [search, setSearch] = useState<string>("")
-
-  // function createGoogleMapsLink(name:string) {
-  //   const { lat, lng } = coordinates;
-  //   return `https://www.google.com/maps/search/?api=1&query=${name}`;
-  // }
 
   const fetchData = async () => {
     setLoading(true)
@@ -42,7 +37,6 @@ const Home = () => {
     }
     setLoading(false)
   }
-
 
   return (
       <div style={{height: "100vh", width: "100vw"}}>
