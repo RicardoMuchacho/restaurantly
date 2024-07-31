@@ -4,6 +4,8 @@
 
 This project is a curriculum project designed to practice React and TypeScript fundamentals, as well as SOLID principles. It utilizes the Google API to search for restaurant recommendations based on a text string input.
 
+![Screenshot of the app](./public/screenshot.png)
+
 ## Purpose
 
 The primary purpose of this project is to:
