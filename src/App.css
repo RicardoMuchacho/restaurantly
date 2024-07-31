@@ -1,0 +1,12 @@
+/* * {
+  font-family:'Times New Roman', Times, serif;
+} */
+
+.footer-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: blue;
+}
