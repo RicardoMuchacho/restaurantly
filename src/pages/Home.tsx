@@ -20,7 +20,6 @@ const Home = () => {
       res.places.slice(0, 8).forEach((rt: any) => {
         const photoReference = rt.photos?.[0]?.name;
 
-        console.log(photoReference)
         temp_restaurants.push({
           name: rt.displayName.text,
           address: rt.formattedAddress,
