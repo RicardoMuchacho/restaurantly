@@ -1,7 +1,7 @@
 import React from "react";
 
 interface Props {
-  fetchRestaurants: () => void;
+  fetchRestaurants: (search: string) => void;
   setSearch: (search:string) => void;
   search: string;
   loading: boolean;
@@ -18,7 +18,7 @@ const SearchBar = ({search, loading, setSearch, fetchRestaurants}:Props) => {
 
   const handleSearch = (e:any) => {
     e.preventDefault();
-    fetchRestaurants();
+    fetchRestaurants(search);
   }
 
   return (

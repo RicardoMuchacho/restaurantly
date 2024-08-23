@@ -1,41 +1,14 @@
 import React from "react";
 import { useState } from "react";
 import SearchBar from "../components/SearchBar";
-import { Restaurant } from "../interfaces/Restaurant";
 import RestaurantCard from "../components/RestaurantCard";
 import Footer from "../components/Footer";
-import { fetchRestaurants } from "../api/api";
 import RestaurantPlaceholder from "../components/RestaurantPlaceholder";
+import useRestaurants from "../hooks/useRestaurants";
 
 const Home = () => {
-  const [restaurants, setRestaurants] = useState<Restaurant[]>([])
-  const [loading, setLoading] = useState<boolean>(false)
   const [search, setSearch] = useState<string>("")
-
-  const fetchData = async () => {
-    setLoading(true)
-    try {
-      let temp_restaurants:Restaurant[] = [];
-      const res = await fetchRestaurants(search)
-      res.places.slice(0, 8).forEach((rt: any) => {
-        const photoReference = rt.photos?.[0]?.name;
-
-        temp_restaurants.push({
-          name: rt.displayName.text,
-          address: rt.formattedAddress,
-          type: rt.primaryTypeDisplayName.text,
-          rating: rt.rating,
-          price: rt.priceLevel,
-          link: rt.googleMapsUri,
-          image: photoReference,
-        })
-      })
-      setRestaurants(temp_restaurants)
-    } catch (error) {
-      console.log(error)
-    }
-    setLoading(false)
-  }
+  const {restaurants, loading, getRestaurants} = useRestaurants(search)
 
   return (
       <div style={{height: "100vh", width: "100vw"}}>
@@ -44,7 +17,7 @@ const Home = () => {
             <h2 className="text-center text-primary"> Restaurantly Recommendations App</h2>
           </div>
           <div className="d-flex p-2 justify-content-center">
-            <SearchBar loading={loading} search={search} setSearch={setSearch} fetchRestaurants={fetchData}/>
+            <SearchBar loading={loading} search={search} setSearch={setSearch} fetchRestaurants={getRestaurants}/>
           </div>
         </header>
         <main style={{marginBottom: 100}} className="w-100 h-auto">
