@@ -1,39 +1,40 @@
-import React from "react";
+import React from 'react'
+import useRestaurants from '../hooks/useRestaurants'
 
 interface Props {
-  fetchRestaurants: (search: string) => void;
-  setSearch: (search:string) => void;
-  search: string;
-  loading: boolean;
+  setSearch: (search: string) => void
+  search: string
+  loading: boolean
 }
 
-const SearchBar = ({search, loading, setSearch, fetchRestaurants}:Props) => {
+const SearchBar = ({ search, loading, setSearch }: Props) => {
+  const { getRestaurants } = useRestaurants()
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      e.preventDefault(); // Prevent form submission
-      handleSearch(e);
+      e.preventDefault() // Prevent form submission
+      handleSearch(e)
     }
-  };
+  }
 
-  const handleSearch = (e:any) => {
-    e.preventDefault();
-    fetchRestaurants(search);
+  const handleSearch = (e: any) => {
+    e.preventDefault()
+    getRestaurants(search)
   }
 
   return (
     <form className="d-flex w-100 gap-2 justify-content-center">
       <input
-        style={{height: 45, maxWidth: "70%"}}
+        style={{ height: 45, maxWidth: '70%' }}
         className="form-control flex-grow-1"
         type="search"
         placeholder="Ejemplo: Pizza en Barcelona 08029"
         aria-label="Search"
-        onChange={(e:any) => setSearch(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setSearch(e.target.value) }}
         onKeyDown={handleKeyDown}
       />
-      <button 
-        className="btn btn-primary" 
+      <button
+        className="btn btn-primary"
         onClick={handleSearch}
         disabled={loading || search.length === 0}
       >
