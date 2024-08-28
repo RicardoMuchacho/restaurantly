@@ -10,13 +10,6 @@ interface Props {
 const SearchBar = ({ search, loading, setSearch }: Props) => {
   const { getRestaurants } = useRestaurants()
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      e.preventDefault() // Prevent form submission
-      handleSearch(e)
-    }
-  }
-
   const handleSearch = (e: any) => {
     e.preventDefault()
     getRestaurants(search)
@@ -31,18 +24,15 @@ const SearchBar = ({ search, loading, setSearch }: Props) => {
         placeholder="Ejemplo: Pizza en Barcelona 08029"
         aria-label="Search"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setSearch(e.target.value) }}
-        onKeyDown={handleKeyDown}
       />
       <button
         className="btn btn-primary"
         onClick={handleSearch}
+        type='submit'
         disabled={loading || search.length === 0}
       >
         Search
       </button>
-      {/* <button className="btn text-white bg-primary" type="submit">
-        Filters
-      </button> */}
     </form>
   )
 }
