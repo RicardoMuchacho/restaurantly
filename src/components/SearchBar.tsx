@@ -5,7 +5,7 @@ interface Props {
   setSearch: (search: string) => void
   search: string
   loading: boolean
-  fetchRestaurants: () => void
+  fetchRestaurants: (e: any) => void
 }
 
 const SearchBar = ({ search, loading, setSearch, fetchRestaurants}: Props) => {

@@ -12,6 +12,9 @@ const getRestaurants = async (search: string): Promise<Restaurant[]> => {
   try {
     const tempRestaurants: Restaurant[] = []
     const res: any = await fetchRestaurants(search)
+    if (!res.places) {
+      throw new Error('No places found in the response')
+    }
     res.places.slice(0, 8).forEach((rt: any) => {
       const photoReference = rt.photos?.[0]?.name
       tempRestaurants.push({
@@ -40,7 +43,8 @@ const Home = () => {
     enabled: false
   })
 
-  const handleFetchRestaurants = () => {
+  const handleFetchRestaurants = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     refetch();
   };
 
@@ -58,15 +62,15 @@ const Home = () => {
             loading={isFetching}
             search={search}
             setSearch={setSearch}
-            fetchRestaurants={handleFetchRestaurants}
+            fetchRestaurants={(e:any) => handleFetchRestaurants(e)}
           />
         </div>
       </header>
       <main style={{ marginBottom: 100 }} className="w-100 h-auto">
         <div className="container">
           <div className="row row-cols-1-sm row-cols-2-md row-cols-3-lg row-cols-4-xl g-3">
-            {restaurants?.length === 0 || isPending
-              ? Array.from({ length: 4 }).map((_, index) => (
+            {isFetching || isPending
+              ? Array.from({ length: 6 }).map((_, index) => (
                 <div
                   key={index}
                   className="col d-flex justify-content-center"
