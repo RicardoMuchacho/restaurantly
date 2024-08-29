@@ -1,5 +1,5 @@
 import React from 'react'
-import useRestaurants from '../hooks/useRestaurants'
+// import useRestaurants from '../hooks/useRestaurants'
 
 interface Props {
   setSearch: (search: string) => void
@@ -9,12 +9,11 @@ interface Props {
 }
 
 const SearchBar = ({ search, loading, setSearch, fetchRestaurants}: Props) => {
-  const { getRestaurants } = useRestaurants()
-
-  const handleSearch = (e: any) => {
-    e.preventDefault()
-    getRestaurants(search)
-  }
+  // const { getRestaurants } = useRestaurants()
+  // const handleSearch = (e: any) => {
+  //   e.preventDefault()
+  //   getRestaurants(search)
+  // }
 
   return (
     <form className="d-flex w-100 gap-2 justify-content-center">

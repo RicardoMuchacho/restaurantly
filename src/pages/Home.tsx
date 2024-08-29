@@ -3,7 +3,7 @@ import SearchBar from '../components/SearchBar'
 import RestaurantCard from '../components/RestaurantCard'
 import Footer from '../components/Footer'
 import RestaurantPlaceholder from '../components/RestaurantPlaceholder'
-import useRestaurants from '../hooks/useRestaurants'
+// import useRestaurants from '../hooks/useRestaurants'
 import { fetchRestaurants } from '../api/api'
 import { Restaurant } from '../interfaces/Restaurant'
 import { useQuery } from '@tanstack/react-query'
@@ -34,7 +34,7 @@ const Home = () => {
   const [search, setSearch] = useState<string>('')
   // const { restaurants, loading } = useRestaurants()
 
-  const { isPending, isError, data: restaurants, refetch, isFetching } = useQuery({
+  const { isPending, data: restaurants, refetch, isFetching } = useQuery({
     queryKey: ['restaurants'],
     queryFn: () => getRestaurants(search),
     enabled: false
