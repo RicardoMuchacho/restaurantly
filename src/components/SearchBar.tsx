@@ -5,9 +5,10 @@ interface Props {
   setSearch: (search: string) => void
   search: string
   loading: boolean
+  fetchRestaurants: () => void
 }
 
-const SearchBar = ({ search, loading, setSearch }: Props) => {
+const SearchBar = ({ search, loading, setSearch, fetchRestaurants}: Props) => {
   const { getRestaurants } = useRestaurants()
 
   const handleSearch = (e: any) => {
@@ -27,7 +28,7 @@ const SearchBar = ({ search, loading, setSearch }: Props) => {
       />
       <button
         className="btn btn-primary"
-        onClick={handleSearch}
+        onClick={fetchRestaurants}
         type='submit'
         disabled={loading || search.length === 0}
       >

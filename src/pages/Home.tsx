@@ -1,14 +1,48 @@
 import React, { useState } from 'react'
-
 import SearchBar from '../components/SearchBar'
 import RestaurantCard from '../components/RestaurantCard'
 import Footer from '../components/Footer'
 import RestaurantPlaceholder from '../components/RestaurantPlaceholder'
 import useRestaurants from '../hooks/useRestaurants'
+import { fetchRestaurants } from '../api/api'
+import { Restaurant } from '../interfaces/Restaurant'
+import { useQuery } from '@tanstack/react-query'
+
+const getRestaurants = async (search: string): Promise<Restaurant[]> => {
+  try {
+    const tempRestaurants: Restaurant[] = []
+    const res: any = await fetchRestaurants(search)
+    res.places.slice(0, 8).forEach((rt: any) => {
+      const photoReference = rt.photos?.[0]?.name
+      tempRestaurants.push({
+        name: rt.displayName.text,
+        address: rt.formattedAddress,
+        type: rt.primaryTypeDisplayName.text,
+        rating: rt.rating,
+        price: rt.priceLevel,
+        link: rt.googleMapsUri,
+        image: photoReference
+      })
+    })
+    return tempRestaurants
+  } catch (error) {
+    throw new Error('Error fetching restaurants')
+  }
+}
 
 const Home = () => {
   const [search, setSearch] = useState<string>('')
-  const { restaurants, loading } = useRestaurants()
+  // const { restaurants, loading } = useRestaurants()
+
+  const { isPending, isError, data: restaurants, refetch, isFetching } = useQuery({
+    queryKey: ['restaurants'],
+    queryFn: () => getRestaurants(search),
+    enabled: false
+  })
+
+  const handleFetchRestaurants = () => {
+    refetch();
+  };
 
   return (
     <div style={{ height: '100vh', width: '100vw' }}>
@@ -21,16 +55,17 @@ const Home = () => {
         </div>
         <div className="d-flex p-2 justify-content-center">
           <SearchBar
-            loading={loading}
+            loading={isFetching}
             search={search}
             setSearch={setSearch}
+            fetchRestaurants={handleFetchRestaurants}
           />
         </div>
       </header>
       <main style={{ marginBottom: 100 }} className="w-100 h-auto">
         <div className="container">
           <div className="row row-cols-1-sm row-cols-2-md row-cols-3-lg row-cols-4-xl g-3">
-            {restaurants.length === 0
+            {restaurants?.length === 0 || isPending
               ? Array.from({ length: 4 }).map((_, index) => (
                 <div
                   key={index}
@@ -39,7 +74,7 @@ const Home = () => {
                   <RestaurantPlaceholder />
                 </div>
               ))
-              : restaurants.map((restaurant, index) => (
+              : restaurants?.map((restaurant, index) => (
                 <div
                   key={index}
                   className="col d-flex justify-content-center"

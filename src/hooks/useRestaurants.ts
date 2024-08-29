@@ -26,7 +26,7 @@ const useRestaurants = () => {
       })
       setRestaurants(tempRestaurants)
     } catch (error) {
-      console.log(error)
+      throw new Error('Errror fetching restaurants')
     }
     setLoading(false)
   }

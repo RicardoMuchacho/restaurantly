@@ -31,7 +31,7 @@ test('Restaurant search result', async () => {
   const mockSetSearch = jest.fn()
   const search = 'Pizza in Barcelona'
   const loading = false
-  // const mockHandler = jest.fn()
+  const mockHandler = jest.fn()
   const placeholderComponent = render(<RestaurantPlaceholder />)
   const restaurantCardComponent = render(<RestaurantCard restaurant={restaurant} />)
   const searchComponent = render(
@@ -39,6 +39,7 @@ test('Restaurant search result', async () => {
       setSearch={mockSetSearch}
       search={search}
       loading={loading}
+      fetchRestaurants={mockHandler}
     />
   )
 
